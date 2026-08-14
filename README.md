@@ -11,8 +11,10 @@ Pages: **Home, About WCS, Services, Gallery, Contact, Privacy Policy.**
 - **Next.js 15** (App Router, TypeScript) — every page is statically rendered
   except the contact form's API route.
 - **Tailwind CSS 3** with the brand tokens wired into `tailwind.config.ts`.
-- **Fonts** via `next/font/google`: Poppins (600, 700) for headings/nav/buttons,
-  Public Sans (400, 600, 700) for body copy.
+- **Fonts** self-hosted via `next/font/local` (files in `app/fonts/`): Poppins
+  (600, 700) for headings/nav/buttons, Public Sans (variable, 400–700) for body
+  copy. Self-hosting keeps the production build free of any network fetch to
+  Google Fonts.
 - **Images** via `next/image` from local files in `public/images`, with per-grid
   `sizes` so phones don't download desktop-size files.
 

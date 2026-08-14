@@ -1,21 +1,29 @@
 import type { Metadata } from "next";
-import { Poppins, Public_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["600", "700"],
+// Fonts are self-hosted (latin subset) so the build never depends on a
+// network fetch to Google Fonts. Poppins ships one file per weight; Public
+// Sans is a variable font whose single file covers the whole 400–700 range.
+const poppins = localFont({
+  src: [
+    { path: "./fonts/poppins-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/poppins-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-poppins",
   display: "swap",
+  fallback: ["sans-serif"],
 });
 
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+const publicSans = localFont({
+  src: "./fonts/public-sans.woff2",
+  weight: "400 700",
+  style: "normal",
   variable: "--font-public-sans",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
