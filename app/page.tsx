@@ -72,8 +72,8 @@ export default function HomePage() {
           <div className="w-full max-w-[420px] justify-self-center bg-white p-[14px] shadow-frame-strong">
             <div className="relative aspect-[4/5] w-full bg-img-placeholder">
               <Image
-                src="/images/will-portrait.jpg"
-                alt="Will from WCS Building Services"
+                src="/images/home-intro.jpg"
+                alt="A WCS Building Services project"
                 fill
                 sizes="(max-width: 900px) 100vw, 420px"
                 className="object-cover"
