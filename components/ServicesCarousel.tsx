@@ -100,7 +100,7 @@ export function ServicesCarousel() {
       onBlurCapture={() => setPaused(false)}
     >
       <div
-        className="overflow-hidden"
+        className="overflow-hidden pt-2 pb-8"
         role="region"
         aria-roledescription="carousel"
         aria-label="Our services"
@@ -124,7 +124,7 @@ export function ServicesCarousel() {
                 href={card.href}
                 aria-hidden={!visible}
                 tabIndex={visible ? undefined : -1}
-                className="group flex-none bg-white p-[10px] text-navy transition-colors duration-[250ms] hover:bg-navy focus-visible:bg-navy"
+                className="group flex-none bg-white p-[10px] text-navy transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_14px_30px_rgba(12,29,61,0.15)] focus-visible:-translate-y-2 focus-visible:shadow-[0_14px_30px_rgba(12,29,61,0.15)]"
                 style={{ flexBasis: basis }}
               >
                 <div className="relative aspect-[4/3] w-full bg-img-placeholder">
@@ -136,7 +136,7 @@ export function ServicesCarousel() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="my-3 mt-4 text-center font-heading text-[19px] font-bold text-navy transition-colors duration-[250ms] group-hover:text-gold group-focus-visible:text-gold">
+                <h3 className="my-3 mt-4 text-center font-heading text-[19px] font-bold text-navy">
                   {card.label}
                 </h3>
               </Link>
