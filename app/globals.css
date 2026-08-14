@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-body text-body antialiased;
+  }
+
+  /* Native-ish focus ring in brand gold for keyboard users. */
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid theme("colors.gold");
+    outline-offset: 2px;
+  }
+
+  /* Form inputs get a solid gold focus outline per the brief. */
+  input:focus,
+  textarea:focus {
+    outline: 2px solid theme("colors.gold");
+    outline-offset: 0;
+  }
+}
+
+@layer components {
+  /* Content column: 1200px cap with a 24px gutter that sits OUTSIDE the box,
+     so hero headings and body content share one left edge. */
+  .container-1200 {
+    @apply mx-auto w-full max-w-container px-6;
+  }
+
+  /* Gold rule under section headings. Width is set inline per heading. */
+  .gold-rule {
+    @apply h-[3px] bg-gold;
+  }
+
+  /* Angled section edges (subtle diagonal joins from the original). */
+  .clip-home-hero {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+  .clip-home-services {
+    clip-path: polygon(0 3.2%, 100% 0, 100% 96.8%, 0 100%);
+  }
+  .clip-about-intro {
+    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+  }
+  .clip-gallery-categories {
+    clip-path: polygon(0 2.4%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Navy footer dot texture. */
+  .footer-dots {
+    background-color: theme("colors.navy");
+    background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
