@@ -15,6 +15,7 @@ type Service = {
   src: string;
   alt: string;
   paragraphs: string[];
+  comingSoon?: boolean;
 };
 
 const services: Service[] = [
@@ -83,6 +84,7 @@ const services: Service[] = [
     title: "Pre-Historic Builds",
     src: "/images/pre-historic.jpg",
     alt: "Pre-historic build restoration",
+    comingSoon: true,
     paragraphs: [
       "Here at WCS we now specialise in bespoke pre-historic builds. We were contacted in regards to a 15th century building that was left abandoned, and worked with various trades to bring the building back to life.",
       "We can happily say the finished result is fantastic, and hopefully we can land another one similar to this. Pictures soon incoming…",
@@ -116,13 +118,21 @@ export default function ServicesPage() {
                     imageRight ? "min-[900px]:order-2" : ""
                   }`}
                 >
-                  <Image
-                    src={s.src}
-                    alt={s.alt}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 50vw"
-                    className="object-cover"
-                  />
+                  {s.comingSoon ? (
+                    <div className="absolute inset-0 flex items-center justify-center border border-hairline bg-mist">
+                      <span className="font-heading text-[18px] font-semibold text-muted">
+                        Image coming soon
+                      </span>
+                    </div>
+                  ) : (
+                    <Image
+                      src={s.src}
+                      alt={s.alt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 <div>
                   <h2 className="mb-[18px] font-heading text-[clamp(26px,3vw,35px)] font-bold text-navy">
