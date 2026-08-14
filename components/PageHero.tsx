@@ -14,7 +14,7 @@ export function PageHero({
   return (
     <section className="relative bg-navy">
       <Image
-        src="/images/hero-banner.jpg"
+        src="/images/page-hero.jpg"
         alt=""
         fill
         priority
