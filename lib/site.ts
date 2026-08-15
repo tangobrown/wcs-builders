@@ -10,6 +10,10 @@ export const site = {
   servicing: "Axminster, East Devon & surrounding areas",
   areaServed: ["Axminster", "East Devon"],
   copyright: "© 2026 WCS Builders",
+  // Contact form endpoint (Formspree). This is a public form ID — safe to ship
+  // in the client bundle. Override with NEXT_PUBLIC_FORMSPREE_ENDPOINT if needed.
+  formspreeEndpoint:
+    process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "https://formspree.io/f/moeanjvz",
 } as const;
 
 export type NavItem = { label: string; href: string; key: string };

@@ -61,16 +61,17 @@ share one left edge.
 
 ## Contact form
 
-`components/ContactForm.tsx` posts JSON to `app/api/contact/route.ts`, which:
+`components/ContactForm.tsx` validates required fields (name + a valid email)
+client-side, then posts the submission straight to **Formspree** as JSON with
+`Accept: application/json` (so Formspree replies with JSON rather than a
+redirect). It shows inline field errors, a pending state, a success panel and
+an error state, and includes a honeypot (`_gotcha`) that both the form and
+Formspree use to drop bots.
 
-- validates required fields (name + a valid email),
-- drops bot submissions via a honeypot field,
-- delivers via **Resend** when `RESEND_API_KEY` and `CONTACT_TO_EMAIL` are set,
-- otherwise logs the message server-side and returns success (so the site works
-  out of the box for demos).
-
-Copy `.env.example` to `.env.local` and fill in the Resend credentials before
-launch. Swap Resend for Nodemailer/Formspree here if the client prefers.
+The endpoint lives in `lib/site.ts` (`formspreeEndpoint`) and can be overridden
+with `NEXT_PUBLIC_FORMSPREE_ENDPOINT`. The Formspree form ID is public by design,
+so no server route or secret is required. Enquiries are delivered to whichever
+inbox the Formspree form is configured to notify.
 
 ## Photography — action required before launch
 
