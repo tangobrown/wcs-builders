@@ -113,7 +113,6 @@ export default function ServicesPage() {
       <PageHero
         title="Services"
         subtitle="From repairs and renovations to extensions and remodelling, our expert craftsmanship is second to none."
-        active="services"
       />
 
       <section className="bg-white px-6 pt-[clamp(40px,6vw,80px)] pb-[clamp(48px,7vw,92px)]">

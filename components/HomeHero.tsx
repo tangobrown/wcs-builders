@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "./Button";
-import { SiteHeader } from "./SiteHeader";
 
 /**
  * Home hero — full-bleed photo, navy gradient overlay, angled bottom edge.
@@ -25,8 +24,7 @@ export function HomeHero() {
         }}
       />
       <div className="relative">
-        <SiteHeader active="home" />
-        <div className="container-1200 pt-[clamp(48px,9vw,120px)] pb-[clamp(110px,14vw,190px)]">
+        <div className="container-1200 pb-[clamp(110px,14vw,190px)] pt-[calc(var(--header-h,124px)+clamp(48px,9vw,120px))]">
           <h1
             className="max-w-[24ch] font-heading text-[clamp(35px,5.4vw,56px)] font-bold leading-[1.14] text-white"
             style={{ textWrap: "balance" }}

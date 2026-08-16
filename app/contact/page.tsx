@@ -57,7 +57,7 @@ export default function ContactPage() {
           extra: [faqNode(faqs.map(({ q, a }) => ({ q, a })))],
         })}
       />
-      <PageHero title="Contact" active="contact" />
+      <PageHero title="Contact" />
 
       <section className="bg-white px-6 pt-[clamp(44px,6vw,88px)] pb-[clamp(56px,8vw,100px)]">
         <div className="container-1200 !px-0 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-start gap-[clamp(36px,5vw,80px)]">

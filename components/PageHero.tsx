@@ -1,15 +1,12 @@
 import Image from "next/image";
-import { SiteHeader } from "./SiteHeader";
 
 /** Interior page banner: title, 170px gold rule, optional subtitle. */
 export function PageHero({
   title,
   subtitle,
-  active,
 }: {
   title: string;
   subtitle?: string;
-  active?: string;
 }) {
   return (
     <section className="relative bg-navy">
@@ -29,8 +26,7 @@ export function PageHero({
         }}
       />
       <div className="relative">
-        <SiteHeader active={active} />
-        <div className="container-1200 pt-[clamp(40px,7vw,90px)] pb-[clamp(48px,8vw,104px)]">
+        <div className="container-1200 pb-[clamp(48px,8vw,104px)] pt-[calc(var(--header-h,124px)+clamp(40px,7vw,90px))]">
           <h1 className="font-heading text-[clamp(35px,4.8vw,54px)] font-bold leading-[1.1] text-white">
             {title}
           </h1>

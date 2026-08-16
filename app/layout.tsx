@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import { globalGraph, JsonLd } from "@/lib/seo";
 import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
 import "./globals.css";
 
 // Fonts are self-hosted (latin subset) so the build never depends on a
@@ -105,6 +106,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <SiteHeader />
         <main id="main">{children}</main>
         <Footer />
         <JsonLd data={globalGraph()} />

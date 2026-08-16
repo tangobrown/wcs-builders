@@ -61,7 +61,7 @@ export default function AboutPage() {
           ],
         })}
       />
-      <PageHero title="About WCS" active="about" />
+      <PageHero title="About WCS" />
 
       {/* Intro */}
       <section className="clip-about-intro bg-mist px-6 pt-[clamp(48px,7vw,92px)] pb-[clamp(56px,8vw,104px)]">

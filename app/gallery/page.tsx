@@ -90,7 +90,7 @@ export default function GalleryPage() {
           ],
         })}
       />
-      <PageHero title="Gallery" active="gallery" />
+      <PageHero title="Gallery" />
 
       {/* Recent projects */}
       <section className="bg-white px-6 pt-[clamp(44px,6vw,84px)] pb-[clamp(20px,3vw,32px)]">
