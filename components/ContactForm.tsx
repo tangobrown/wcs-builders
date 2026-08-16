@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 type Errors = { name?: string; email?: string };
@@ -52,28 +51,24 @@ export function ContactForm() {
       return;
     }
 
-    // Honeypot — real users leave Formspree's `_gotcha` field empty. If it's
-    // filled, silently show success without sending anything.
-    if (String(data.get("_gotcha") ?? "") !== "") {
+    // Honeypot — real users leave this hidden field empty. If it's filled,
+    // silently show success without sending anything.
+    if (String(data.get("company") ?? "") !== "") {
       setStatus("sent");
       return;
     }
 
     setStatus("submitting");
     try {
-      const res = await fetch(site.formspreeEndpoint, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Ask Formspree for a JSON response instead of a redirect.
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
           email,
           phone: String(data.get("phone") ?? "").trim(),
           message: String(data.get("message") ?? "").trim(),
-          _subject: `Website enquiry from ${name}`,
+          company: String(data.get("company") ?? ""),
         }),
       });
       if (!res.ok) throw new Error("Request failed");
@@ -87,12 +82,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="flex max-w-[560px] flex-col gap-5">
-      {/* Honeypot: visually hidden, ignored by real users. Formspree also
-          filters submissions where its `_gotcha` field is filled. */}
+      {/* Honeypot: visually hidden, ignored by real users. The server drops
+          any submission where this field is filled. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
           Company
-          <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
+          <input type="text" name="company" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 

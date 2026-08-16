@@ -62,16 +62,24 @@ share one left edge.
 ## Contact form
 
 `components/ContactForm.tsx` validates required fields (name + a valid email)
-client-side, then posts the submission straight to **Formspree** as JSON with
-`Accept: application/json` (so Formspree replies with JSON rather than a
-redirect). It shows inline field errors, a pending state, a success panel and
-an error state, and includes a honeypot (`_gotcha`) that both the form and
-Formspree use to drop bots.
+client-side, then posts the submission as JSON to the `app/api/contact/route.ts`
+route handler, which sends the enquiry via **Postmark**. It shows inline field
+errors, a pending state, a success panel and an error state, and includes a
+honeypot (`company`) that the server drops.
 
-The endpoint lives in `lib/site.ts` (`formspreeEndpoint`) and can be overridden
-with `NEXT_PUBLIC_FORMSPREE_ENDPOINT`. The Formspree form ID is public by design,
-so no server route or secret is required. Enquiries are delivered to whichever
-inbox the Formspree form is configured to notify.
+Postmark needs a **secret Server API token**, so delivery must happen
+server-side (never from the browser) — that's why the form goes through the API
+route. Configure these environment variables (see `.env.example`):
+
+- `POSTMARK_SERVER_TOKEN` — Postmark Server API token (secret)
+- `CONTACT_TO_EMAIL` — where enquiries are delivered
+- `CONTACT_FROM_EMAIL` — a **verified** Postmark sender signature or an address
+  on a verified domain
+- `POSTMARK_MESSAGE_STREAM` — optional, defaults to `outbound`
+
+Without them the route logs the message and still returns success, so the site
+is demoable out of the box; wire the real values before launch. The submitter's
+email is set as `ReplyTo` so replies go straight back to them.
 
 ## Photography — action required before launch
 
