@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { site } from "@/lib/site";
+import { globalGraph, JsonLd } from "@/lib/seo";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
@@ -29,51 +30,66 @@ const publicSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "WCS Building Services | Domestic building project specialists",
-    template: "%s | WCS",
+    default:
+      "WCS Building Services | Builders in Axminster & East Devon",
+    template: "%s | WCS Building Services",
   },
   description:
-    "Building services based in Devon – we do extensions, loft conversions, kitchens, barn conversions, driveways and much more. Get in touch for a free quote now.",
+    "Domestic builders in Axminster, East Devon. Extensions, loft & barn conversions, kitchens, driveways and bespoke projects from a trusted father-and-son team. Get a free quote.",
+  applicationName: site.name,
+  authors: [{ name: site.name }],
+  creator: site.name,
+  publisher: site.name,
+  category: "construction",
+  keywords: [
+    "builders Axminster",
+    "builders East Devon",
+    "home extensions Devon",
+    "loft conversions Devon",
+    "barn conversions Devon",
+    "kitchen fitters Devon",
+    "driveways Axminster",
+    "domestic building services",
+    "WCS Building Services",
+  ],
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: true, email: false, address: false },
   openGraph: {
     type: "website",
     siteName: site.name,
     locale: "en_GB",
     url: site.url,
-    images: [{ url: "/images/hero-banner.jpg", width: 1920, height: 1200 }],
+    title: "WCS Building Services | Builders in Axminster & East Devon",
+    description:
+      "Domestic builders in Axminster, East Devon — extensions, loft & barn conversions, kitchens, driveways and bespoke projects.",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: site.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WCS Building Services | Builders in Axminster & East Devon",
+    description:
+      "Domestic builders in Axminster, East Devon — extensions, loft & barn conversions, kitchens, driveways and bespoke projects.",
+    images: ["/og.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: "/logo.png",
   },
 };
 
-/** LocalBusiness structured data — helps local search surface the business. */
-function LocalBusinessJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "GeneralContractor",
-    name: site.name,
-    url: site.url,
-    telephone: "+447739084929",
-    image: `${site.url}/logo.png`,
-    areaServed: site.areaServed.map((name) => ({
-      "@type": "AdministrativeArea",
-      name,
-    })),
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Axminster",
-      addressRegion: "Devon",
-      addressCountry: "GB",
-    },
-    sameAs: [site.facebook],
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
+export const viewport: Viewport = {
+  themeColor: "#0c1d3d",
+};
 
 export default function RootLayout({
   children,
@@ -91,7 +107,7 @@ export default function RootLayout({
         </a>
         <main id="main">{children}</main>
         <Footer />
-        <LocalBusinessJsonLd />
+        <JsonLd data={globalGraph()} />
       </body>
     </html>
   );

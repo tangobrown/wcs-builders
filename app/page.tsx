@@ -3,6 +3,7 @@ import { Button } from "@/components/Button";
 import { HomeHero } from "@/components/HomeHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServicesCarousel } from "@/components/ServicesCarousel";
+import { JsonLd, pageGraph, servicesListNode } from "@/lib/seo";
 
 const whyChoose: { title: string; body: React.ReactNode }[] = [
   {
@@ -42,6 +43,16 @@ const whyChoose: { title: string; body: React.ReactNode }[] = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/",
+          name: "WCS Building Services — Domestic builders in Axminster & East Devon",
+          description:
+            "Extensions, loft & barn conversions, kitchens, driveways and bespoke building projects across Axminster and East Devon.",
+          crumbs: [{ name: "Home", path: "/" }],
+          extra: [servicesListNode()],
+        })}
+      />
       <HomeHero />
 
       {/* Intro */}

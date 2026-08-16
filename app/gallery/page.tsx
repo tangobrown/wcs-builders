@@ -1,49 +1,50 @@
-import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ZoomImage } from "@/components/ZoomImage";
+import { JsonLd, pageGraph, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gallery",
+export const metadata = pageMetadata({
+  title: "Our Recent Work",
   description:
-    "Recent projects and a gallery of our brickwork, cladding, extensions and driveways across Axminster, Lyme Regis and East Devon.",
-};
+    "See recent WCS projects — barn conversions, extensions and driveways — plus a gallery of brickwork, cladding and porches across Axminster, Lyme Regis and East Devon.",
+  path: "/gallery",
+});
 
 const categories = [
   {
     title: "Brickwork",
     ruleWidth: 110,
     images: [
-      { src: "/images/brickwork-1.jpg", alt: "Brickwork detail" },
-      { src: "/images/brickwork-2.jpg", alt: "Brickwork detail" },
-      { src: "/images/brickwork-3.jpg", alt: "Brickwork detail" },
+      { src: "/images/brickwork-1.jpg", alt: "Brickwork by WCS Building Services in East Devon"},
+      { src: "/images/brickwork-2.jpg", alt: "Brickwork by WCS Building Services in East Devon"},
+      { src: "/images/brickwork-3.jpg", alt: "Brickwork by WCS Building Services in East Devon"},
     ],
   },
   {
     title: "Cladding",
     ruleWidth: 110,
     images: [
-      { src: "/images/cladding-1.jpg", alt: "Cladding work" },
-      { src: "/images/cladding-2.jpg", alt: "Cladding work" },
-      { src: "/images/cladding-3.jpg", alt: "Cladding work" },
+      { src: "/images/cladding-1.jpg", alt: "Timber cladding by WCS Building Services in East Devon" },
+      { src: "/images/cladding-2.jpg", alt: "Timber cladding by WCS Building Services in East Devon" },
+      { src: "/images/cladding-3.jpg", alt: "Timber cladding by WCS Building Services in East Devon" },
     ],
   },
   {
     title: "Extension",
     ruleWidth: 110,
     images: [
-      { src: "/images/extension-cat-1.jpg", alt: "Extension build" },
-      { src: "/images/extension-cat-2.jpg", alt: "Extension build" },
-      { src: "/images/extension-cat-3.jpg", alt: "Extension build" },
+      { src: "/images/extension-cat-1.jpg", alt: "Home extension by WCS Building Services in East Devon" },
+      { src: "/images/extension-cat-2.jpg", alt: "Home extension by WCS Building Services in East Devon" },
+      { src: "/images/extension-cat-3.jpg", alt: "Home extension by WCS Building Services in East Devon" },
     ],
   },
   {
     title: "Porch & Driveway",
     ruleWidth: 190,
     images: [
-      { src: "/images/driveway-cat-1.jpg", alt: "Porch and driveway work" },
-      { src: "/images/driveway-cat-2.jpg", alt: "Porch and driveway work" },
-      { src: "/images/driveway-cat-3.jpg", alt: "Porch and driveway work" },
+      { src: "/images/driveway-cat-1.jpg", alt: "Porch and driveway by WCS Building Services in East Devon" },
+      { src: "/images/driveway-cat-2.jpg", alt: "Porch and driveway by WCS Building Services in East Devon" },
+      { src: "/images/driveway-cat-3.jpg", alt: "Porch and driveway by WCS Building Services in East Devon" },
     ],
   },
 ];
@@ -76,6 +77,19 @@ function BeforeAfter({
 export default function GalleryPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/gallery",
+          type: "ImageGallery",
+          name: "Project Gallery — WCS Building Services",
+          description:
+            "Recent building, conversion and driveway projects across East Devon.",
+          crumbs: [
+            { name: "Home", path: "/" },
+            { name: "Gallery", path: "/gallery" },
+          ],
+        })}
+      />
       <PageHero title="Gallery" active="gallery" />
 
       {/* Recent projects */}

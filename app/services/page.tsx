@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/Button";
 import { PageHero } from "@/components/PageHero";
+import { JsonLd, pageGraph, pageMetadata, servicesListNode } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata = pageMetadata({
+  title: "Building Services in East Devon",
   description:
-    "Extensions, loft conversions, kitchens, barn conversions, driveways, bespoke and pre-historic builds. Expert craftsmanship across Axminster and East Devon.",
-};
+    "Extensions, loft & barn conversions, kitchens, driveways, bespoke and heritage builds. Expert craftsmanship from WCS across Axminster and East Devon.",
+  path: "/services",
+});
 
 type Service = {
   id: string;
@@ -95,6 +96,20 @@ const services: Service[] = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/services",
+          type: "CollectionPage",
+          name: "Building Services — WCS Building Services",
+          description:
+            "Extensions, loft & barn conversions, kitchens, driveways, bespoke and heritage builds across East Devon.",
+          crumbs: [
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ],
+          extra: [servicesListNode()],
+        })}
+      />
       <PageHero
         title="Services"
         subtitle="From repairs and renovations to extensions and remodelling, our expert craftsmanship is second to none."

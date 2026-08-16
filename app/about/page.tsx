@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/Button";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PhoneIcon } from "@/components/icons";
 import { site } from "@/lib/site";
+import { JsonLd, pageGraph, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About WCS",
+export const metadata = pageMetadata({
+  title: "About Us",
   description:
-    "Will and Charley Skilton – a father & son construction team based in Axminster. Meet the directors behind WCS Building Services.",
-};
+    "Meet WCS Building Services — a father-and-son building team, Will and Charley Skilton, based in Axminster with 40+ years' experience across East Devon.",
+  path: "/about",
+});
 
 const directors = [
   {
@@ -47,6 +48,19 @@ const steps = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/about",
+          type: "AboutPage",
+          name: "About WCS Building Services",
+          description:
+            "A father-and-son domestic building team based in Axminster, East Devon.",
+          crumbs: [
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ],
+        })}
+      />
       <PageHero title="About WCS" active="about" />
 
       {/* Intro */}

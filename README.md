@@ -91,8 +91,26 @@ Logo: `public/logo.png` is the white wordmark — usable only on dark
 backgrounds. Ask the client for a navy/full-colour version if it's ever needed
 on white.
 
-## SEO
+## SEO & AI search
 
-Per-page titles/descriptions, Open Graph tags, a `sitemap.xml`, `robots.txt`
-and `LocalBusiness` JSON-LD (name, phone, area served) are all wired up. Add
-real per-page OG images alongside the photography swap.
+Search and answer-engine optimisation lives mostly in `lib/seo.tsx`:
+
+- **Metadata** — per-page titles, meta descriptions, canonical URLs, Open Graph
+  and Twitter cards (via a branded `public/og.jpg`), keywords, and explicit
+  `robots` directives (`max-image-preview:large`, etc.).
+- **Structured data (JSON-LD)** — a `GeneralContractor` / `LocalBusiness` entity
+  (name, phone, geo, area served, founders, service catalogue) linked by `@id`
+  to a `WebSite` node, plus per-page `WebPage`/`AboutPage`/`CollectionPage`/
+  `ContactPage` nodes, `BreadcrumbList`s, an `ItemList` of services, and an
+  `FAQPage` on Contact. This is what both Google rich results and AI answer
+  engines read.
+- **Answer-engine content** — a grounded FAQ on the Contact page (matching the
+  FAQPage schema) and a `public/llms.txt` summarising the business for LLM
+  crawlers.
+- **Crawlability** — `sitemap.xml` (with image entries), `robots.txt`,
+  `manifest.webmanifest`, theme colour, and descriptive image `alt` text.
+
+Business facts (name, phone, area, founders, services) are centralised in
+`lib/site.ts` and `lib/seo.tsx`. Update a couple of details before launch if
+available: a full street address/postcode and opening hours (both intentionally
+omitted rather than guessed), and Google/Bing verification tokens.

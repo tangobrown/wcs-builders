@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description:
-    "How WCS Building Services collects, uses and protects your personal information.",
+export const metadata = {
+  ...pageMetadata({
+    title: "Privacy Policy",
+    description:
+      "How WCS Building Services collects, uses and protects your personal information.",
+    path: "/privacy-policy",
+  }),
   robots: { index: false, follow: true },
 };
 
