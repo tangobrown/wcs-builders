@@ -121,7 +121,7 @@ export function SiteHeader() {
       >
         {/* Top bar */}
         <div className="bg-navy px-6 py-[11px]">
-          <div className="container-1200 !px-0 flex items-center justify-end gap-[9px]">
+          <div className="container-1200 !px-0 flex items-center justify-center gap-[9px] min-[900px]:justify-end">
             <MobileIcon className="h-[13px] w-[13px] text-gold" />
             <span className="font-body text-[13px] font-bold uppercase tracking-[0.1em] text-white">
               Call or text{" "}
